@@ -8,6 +8,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -37,13 +38,16 @@ public class StockController {
     }
 
     @PutMapping("/{id}")
-    public Stock updateStock(@PathVariable String id, @RequestBody Stock updatedStock) {
-        return stockService.updateStock(id, updatedStock).orElse(null);
+    public Stock updateStock(@PathVariable String id, @Valid @RequestBody Stock updatedStock) {
+        Optional<Stock> updated = stockService.updateStock(id, updatedStock);
+        return updated.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build()).getBody();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStock(@PathVariable String id) {
+    public ResponseEntity<Void> deleteStock(@PathVariable String id) {
         stockService.deleteStock(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
