@@ -1,3 +1,3 @@
-# mandacarubroker
+# Mandacaru broker
 
-Obs: Note que os arquivos estão na Branches Master
+Obs: Os arquivos estão na Branches Master
