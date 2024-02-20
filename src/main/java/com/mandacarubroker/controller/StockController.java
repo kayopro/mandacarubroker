@@ -3,6 +3,7 @@ package com.mandacarubroker.controller;
 
 import com.mandacarubroker.domain.stock.*;
 import com.mandacarubroker.service.*;
+import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class StockController {
     }
 
     @PostMapping
-    public ResponseEntity<Stock> createStock(@RequestBody RequestStockDTO data) {
+    public ResponseEntity<Stock> createStock(@Valid @RequestBody RequestStockDTO data) {
         Stock createdStock = stockService.createStock(data);
         return ResponseEntity.ok(createdStock);
     }
